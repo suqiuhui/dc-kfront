@@ -1,6 +1,8 @@
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 var path = require('path')
 
 // "__dirname"是node.js中的一个全局变量，它指向当前执行脚本所在的目录
@@ -14,10 +16,16 @@ module.exports = {
         filename: "[name].js" //打包后输出文件的文件名
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
-        alias: { 'vue$': 'vue/dist/vue.esm.js' }
+        extensions: ['.js', '.vue', '.json'],        
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
     },
-    //webpack-dev-server 常用配置
+    devtool: 'inline-source-map',
+    
+    /**
+     * webpack-dev-server 常用配置
+     */
     devServer: {
         contentBase: __dirname + "/dist", //本地服务器所加载的页面所在的目录
         inline: true, //启用内联模式
@@ -33,6 +41,16 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
+            {
+                test: /\.scss$/,
+                use: [{
+                  loader: 'style-loader'
+                }, {
+                  loader: 'css-loader'
+                }, {
+                  loader: 'sass-loader'
+                }]
+              },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('css-loader')
@@ -57,6 +75,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new UglifyJSPlugin(),        
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
