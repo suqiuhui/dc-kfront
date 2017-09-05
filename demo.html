@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+        /*bar的icon用了base64的图*/
+        .bar a.list-icon{
+            background-image:url(data:image/png;base64,iVBORw0KGgXXXXXX);
+        }
+
+        .bar a.grid-icon{
+            background-image:url(data:image/png;base64,iVBORw0XXXXXXX);
+        }
+        /*grid和list两种布局的css都写好了,只要相对切换.gird或者.list就可以实现变化*/
+        ul.grid{
+            width: 570px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        ul.grid li{
+            padding: 2px;
+            float:left;
+        }
+        ul.grid li img{
+            width:280px;
+            height:280px;
+            object-fit: cover;
+            display:block;
+            border:none;
+        }
+        ul.list{
+            width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        ul.list li{
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        ul.list li img{
+            width:120px;
+            height:120px;
+            float:left;
+            border:none;
+        }
+
+        ul.list li p{
+            margin-left: 135px;
+            font-weight: bold;
+            color:#6e7a7f;
+        }
+    </style>
+
+</head>
+<body>
+<!--<div id="main">
+    <nav @click.prevent>
+        &lt;!&ndash;v-for遍历输出内容,并且绑定了class&ndash;&gt;
+        <a v-for="item in items" :class="{'show': item.active}" @click="makeActive(item, $index)">{{item.name}}</a>
+    </nav>
+    <p>You chose <b>{{active}}</b></p>
+</div>
+
+<script src="lib/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#main',
+        data:{
+            active:'HTML',
+            items:[ //被遍历的数组
+                {name:'HTML', active:true}, //通过控制active的值(布尔值)来做一些处理,例如为true的时候show,为false的hide
+                {name:'CSS', active:false},
+                {name:'JavaScript', active:false},
+                {name:'Vue.js', active:false}
+            ]
+        },
+        methods: {
+            makeActive: function(item, index){ //使用传入的当前的v-for循环的遍历项和当前索引
+                this.active = item.name;
+                for(var i=0; i<this.items.length;i++){//将所有item设置为false
+                    this.items[i].active = false;
+                }
+                this.items[index].active = true;//然后单独设置选中的item为true
+            }
+        }
+    });
+
+</script>-->
+
+<!--<div id="main">
+    <div class="bar">
+        &lt;!&ndash;v-bind绑定class的用法,并且通过click改变layout属性&ndash;&gt;
+        <a class="grid-icon" v-bind:class="{ 'active': layout == 'grid'}" v-on:click="layout = 'grid'">grid</a>
+        <a class="list-icon" v-bind:class="{ 'active': layout == 'list'}" v-on:click="layout = 'list'">list</a>
+    </div>
+    &lt;!&ndash;v-if判断layout属性的变化来切换显示&ndash;&gt;
+    <ul v-if="layout == 'grid'" class="grid">
+        <li v-for="a in articles">
+            <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.large" /></a>
+        </li>
+    </ul>
+    <ul v-if="layout == 'list'" class="list">
+        <li v-for="a in articles">
+            <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.small" /></a>
+            <p>{{a.title}}</p>
+        </li>
+    </ul>
+</div>-->
+
+<div id="main">
+    <div class="bar">
+        <!--v-modal的双向绑定-->
+        <input type="text" v-model="searchStr" placeholder="Enter your search terms"/>
+    </div>
+    <ul>
+        <!--这里使用了articles1来做特别标志,证明这个计算属性不是在data里面的,而是通过计算出来的-->
+        <!--通过遍历计算属性articles1来输出需要的信息-->
+        <li v-for="a in articles1">
+            <a :href="a.url"><img :src="a.image"/></a>
+            <p>{{a.title}}</p>
+        </li>
+    </ul>
+</div>
+
+<script src="lib/vue.js"></script>
+<script>
+    /*var demo = new Vue({
+        el: '#main',
+        data: {
+            layout: 'grid',
+            articles: [{
+                "title": "What You Need To Know About CSS Variables",
+                "url": "http://tutorialzine.com/2016/03/what-you-need-to-know-about-css-variables/",
+                "image": {
+                    "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/03/css-variables.jpg",
+                    "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/03/css-variables-150x150.jpg"
+                }
+            },
+                {
+                    "title": "Freebie: 4 Great Looking Pricing Tables",
+                    "url": "http://tutorialzine.com/2016/02/freebie-4-great-looking-pricing-tables/",
+                    "image": {
+                        "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/great-looking-pricing-tables.jpg",
+                        "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/great-looking-pricing-tables-150x150.jpg"
+                    }
+                },
+                {
+                    "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
+                    "url": "http://tutorialzine.com/2016/02/20-interesting-javascript-and-css-libraries-for-february-2016/",
+                    "image": {
+                        "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/interesting-resources-february.jpg",
+                        "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/interesting-resources-february-150x150.jpg"
+                    }
+                },
+                {
+                    "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
+                    "url": "http://tutorialzine.com/2016/02/quick-tip-easiest-way-to-make-responsive-headers/",
+                    "image": {
+                        "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/quick-tip-responsive-headers.png",
+                        "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/quick-tip-responsive-headers-150x150.png"
+                    }
+                },
+                {
+                    "title": "Learn SQL In 20 Minutes",
+                    "url": "http://tutorialzine.com/2016/01/learn-sql-in-20-minutes/",
+                    "image": {
+                        "large": "http://cdn.tutorialzine.com/wp-content/uploads/2016/01/learn-sql-20-minutes.png",
+                        "small": "http://cdn.tutorialzine.com/wp-content/uploads/2016/01/learn-sql-20-minutes-150x150.png"
+                    }
+                },
+                {
+                    "title": "Creating Your First Desktop App With HTML, JS and Electron",
+                    "url": "http://tutorialzine.com/2015/12/creating-your-first-desktop-app-with-html-js-and-electron/",
+                    "image": {
+                        "large": "http://cdn.tutorialzine.com/wp-content/uploads/2015/12/creating-your-first-desktop-app-with-electron.png",
+                        "small": "http://cdn.tutorialzine.com/wp-content/uploads/2015/12/creating-your-first-desktop-app-with-electron-150x150.png"
+                    }
+                }]
+
+        }
+    });*/
+    new Vue({
+        el: '#main',
+        data: {
+            searchStr: "", //双向绑定的属性
+            articles: [
+                {
+                    "title": "What You Need To Know About CSS Variables",
+                    "url": "http://tutorialzine.com/2016/03/what-you-need-to-know-about-css-variables/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2016/03/css-variables-100x100.jpg"
+                },
+                {
+                    "title": "Freebie: 4 Great Looking Pricing Tables",
+                    "url": "http://tutorialzine.com/2016/02/freebie-4-great-looking-pricing-tables/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/great-looking-pricing-tables-100x100.jpg"
+                },
+                {
+                    "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
+                    "url": "http://tutorialzine.com/2016/02/20-interesting-javascript-and-css-libraries-for-february-2016/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/interesting-resources-february-100x100.jpg"
+                },
+                {
+                    "title": "Quick Tip: The Easiest Way To Make Responsive Headers",
+                    "url": "http://tutorialzine.com/2016/02/quick-tip-easiest-way-to-make-responsive-headers/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2016/02/quick-tip-responsive-headers-100x100.png"
+                },
+                {
+                    "title": "Learn SQL In 20 Minutes",
+                    "url": "http://tutorialzine.com/2016/01/learn-sql-in-20-minutes/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2016/01/learn-sql-20-minutes-100x100.png"
+                },
+                {
+                    "title": "Creating Your First Desktop App With HTML, JS and Electron",
+                    "url": "http://tutorialzine.com/2015/12/creating-your-first-desktop-app-with-html-js-and-electron/",
+                    "image": "http://cdn.tutorialzine.com/wp-content/uploads/2015/12/creating-your-first-desktop-app-with-electron-100x100.png"
+                }
+            ]
+        },
+        computed: { //使用计算属性
+            articles1: function () { //这个articles1就是计算属性
+                if(!this.searchStr){ //没有输入搜索项就不处理
+                    return false;
+                }
+                var s = this.searchStr.trim().toLowerCase();
+                //使用js的filter遍历循环,通过在这里处理循环之后然后返回处理好的数组给v-for进行处理
+                var result = this.articles.filter(function (item) {
+                    if (item.title.toLowerCase().indexOf(s) !== -1) {
+                        return item;
+                    }
+                });
+                return result;
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
