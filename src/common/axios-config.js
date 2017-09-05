@@ -9,7 +9,7 @@ export default (
 
         // `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
         // 它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
-        baseURL: 'https://some-domain.com/api/',
+        baseURL: 'http://172.16.232.18:8089/mockjsdata/1',
 
         // `transformRequest` 允许在向服务器发送前，修改请求数据
         // 只能用在 'PUT', 'POST' 和 'PATCH' 这几个请求方法
