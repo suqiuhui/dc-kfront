@@ -15,7 +15,6 @@
     #home {
         width: 200px;
         height: 150px;
-        background-color: red;
         font-size: 14px;
     }
 </style>
