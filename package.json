@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server --open",
+    "start": "webpack-dev-server --open"
   },
   "dependencies": {
     "axios": "^0.16.2",
