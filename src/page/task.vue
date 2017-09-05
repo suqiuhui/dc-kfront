@@ -22,7 +22,8 @@
                     name: "zhangsan@163.com",
                     passWord: "123456"
                 },
-                taskList: undefined
+                taskList: undefined,
+                activeIndex: '4'
             }
         },
         methods: {

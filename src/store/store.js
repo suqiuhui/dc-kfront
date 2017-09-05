@@ -1,40 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
-const store = new Vue.Store({
+const store = new Vuex.Store({
     state: {
-        // taskList: []
-
+        activeIndex: '1'
     },
+
     mutations: {
-        getTaskList (state) {
+        getActiveIndex (state) {
             // return state.taskList
         },
-        setTaskList (state, obj) {
-            // state.taskList = obj.data
+        setActiveIndex (state, obj) {
+            state.activeIndex = obj.activeIndex
         }
     },
     actions: {
-        getTaskList ({commit}) {
-            commit('getTaskList')
+        getActiveIndex ({commit}) {
+            commit('getActiveIndex')
         },
-        setTaskList ({commit}, obj) {
-            commit('setTaskList', obj)
-        },
-
-        ajax (context, obj) {
-            axios({
-                baseURI: 'http://172.16.232.18:8089',
-                url: obj.url, //'/mockjsdata/1/getTaskList',
-                method: obj.method, //'post',
-                data: obj.data //this.user
-            })
+        setActiveIndex ({commit}, obj) {
+            commit('setActiveIndex', obj)
         }
-
-
     },
     getter: {
 
@@ -47,3 +36,4 @@ const store = new Vue.Store({
     }
 
 })
+export default store

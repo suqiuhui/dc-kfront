@@ -11,7 +11,7 @@
                 </el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">登陆</el-button>
+                <el-button type="primary" @click="onSubmit">登录</el-button>
                 <el-button @click="resetForm">重置</el-button>
             </el-form-item>
         </el-form>
@@ -56,7 +56,7 @@
     .login-wrapper {
         position: fixed;
         width: 50%;
-        top: 10%;
+        top: 90px;
         bottom: 0;
         right: 0;
         left: 0;

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import Router from './router/router'
-// import Store from './store/store'
+import Store from './store/store'
 import App from './app.vue'
 
 Vue.config.productionTip = false
@@ -13,7 +13,7 @@ Vue.use(ElementUI)
 new Vue({
     el: '#app',
     router: Router,
-    // store: Store,
+    store: Store,
     template: `<App/>`,
     components: { App }
 })
