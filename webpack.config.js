@@ -5,15 +5,15 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 var path = require('path')
 
-// “__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录
+// "__dirname"是node.js中的一个全局变量，它指向当前执行脚本所在的目录
 module.exports = {
     entry: {
-        app: "./src/main.js"
-    }, //__dirname+"/src/main.js",
+        app: "./src/main.js" //入口文件
+    },
     output: {
-        path: __dirname+"/dist",
-        publicPath: "/",
-        filename: "[name].js"
+        path: __dirname + "/dist", //打包后的文件存放的地方
+        publicPath: "/", //指向生成文件的根目录（相对浏览器）
+        filename: "[name].js" //打包后输出文件的文件名
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],        
@@ -27,15 +27,14 @@ module.exports = {
      * webpack-dev-server 常用配置
      */
     devServer: {
-        contentBase: __dirname + "/dist",
-        inline: true,
+        contentBase: __dirname + "/dist", //本地服务器所加载的页面所在的目录
+        inline: true, //启用内联模式
         hot: true,
-        historyApiFallback: true,
+        historyApiFallback: true, //如果访问的页面不存在(404)时，将会被重定向到 index.html 页面
         port: 8080,
         noInfo: true,
         // open: true
     },
-
     module: {
         rules: [
             {
@@ -75,7 +74,6 @@ module.exports = {
             }
         ]
     },
-
     plugins: [
         new UglifyJSPlugin(),        
         new webpack.HotModuleReplacementPlugin(),
