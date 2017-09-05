@@ -22,7 +22,7 @@ module.exports = {
         contentBase: __dirname + "/dist", //本地服务器所加载的页面所在的目录
         inline: true, //启用内联模式
         hot: true,
-        historyApiFallback: true, //不跳转
+        historyApiFallback: true, //如果访问的页面不存在(404)时，将会被重定向到 index.html 页面
         port: 8080,
         noInfo: true,
         // open: true
