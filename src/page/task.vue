@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import ajax from '../common/ajax.js'
     export default {
         name: 'task',
         data () {
@@ -22,23 +22,15 @@
                     name: "zhangsan@163.com",
                     passWord: "123456"
                 },
-                taskList: undefined,
+                taskList: [],
                 activeIndex: '4'
             }
         },
         methods: {
             getTaskList () {
-                let that = this
-                axios.post('http://172.16.232.18:8089/mockjsdata/1/getTaskList', this.user)
-                    .then(function (response) {
-                        console.log(response.data.data)
-//                        that.taskList = response.data.data
-                        that.taskList =  response.data.data
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-//                        return error
-                    })
+                ajax.ajaxapi('/getTaskList', 'post', this.user).then(res => {
+                    this.taskList = res.data
+                })
             }
         }
     }
