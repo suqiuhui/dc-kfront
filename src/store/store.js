@@ -5,29 +5,27 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        activeIndex: '1'
+        activeIndex: '1',
+        user: {}
     },
 
     mutations: {
-        getActiveIndex (state) {
-
-        },
         setActiveIndex (state, obj) {
             state.activeIndex = obj.activeIndex
+        },
+        setUser (state, obj) {
+            state.user = obj
         }
     },
     actions: {
-        getActiveIndex ({commit}) {
-            commit('getActiveIndex')
-        },
         setActiveIndex ({commit}, obj) {
             commit('setActiveIndex', obj)
+        },
+        setUser ({commit}, obj) {
+            commit('setUser', obj)
         }
     },
     getter: {
-
-    },
-    setter: {
 
     },
     modules: {

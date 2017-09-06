@@ -20,6 +20,7 @@
 
 <script>
     import axios from 'axios'
+    import ajax from "../common/ajax";
     export default {
         name: 'SignUp',
         data(){
@@ -33,15 +34,13 @@
         },
         methods: {
             onSubmit() {
-                axios.post('http://172.16.232.18:8089/mockjsdata/1/login',{
-                    username:this.formData.username,
-                    password:this.formData.password
+                ajax.ajaxapi('/login', 'post', {
+                    username: this.formData.username,
+                    password: this.formData.password
                 }).then((response)=>{
-//                    this.$router
-                    this.$router.push('/')
-                }).catch((error)=>{
-                    console.error(error)
-
+                    localStorage.setItem('user', JSON.stringify(response));
+                    this.$store.dispatch('setUser', response);
+                    this.$router.push('/');
                 })
 
             },
