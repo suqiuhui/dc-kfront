@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         activeIndex: '1',
-        user: {}
+        user: null
     },
 
     mutations: {
@@ -25,8 +25,10 @@ const store = new Vuex.Store({
             commit('setUser', obj)
         }
     },
-    getter: {
-
+    getters: {
+        getUser: state => {
+            return state.user
+        }
     },
     modules: {
 

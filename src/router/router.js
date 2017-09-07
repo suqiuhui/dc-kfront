@@ -5,6 +5,7 @@ import Task from '../page/task.vue'
 import Personal from '../page/personal.vue'
 import About from '../page/about.vue'
 import Login from '../page/login.vue'
+import CanvasTest from '../page/canvas-test.vue'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ const router = new Router({
             path: '/about',
             name: 'About',
             component: About
+        },
+        {
+            path: '/canvasTest',
+            name: 'CanvasTest',
+            component: CanvasTest
         }
     ]
 })

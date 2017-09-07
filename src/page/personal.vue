@@ -13,6 +13,7 @@
         methods: {
             logout () {
                 localStorage.clear();
+                this.$store.dispatch('setUser', null);
                 this.$router.replace('/')
             }
         }
