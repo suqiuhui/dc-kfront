@@ -1,16 +1,12 @@
 <template>
     <div id="app">
-        <v-header></v-header>
-        <div class="content-wrapper">
-            <home>
-                <router-view></router-view>
-            </home>
+        <div class="wrapper">
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-    import header from './components/header.vue'
     import home from './page/home.vue'
     export default {
         name: 'app',
@@ -19,7 +15,6 @@
                 this.$store.state.user = JSON.parse(localStorage.user);
         },
         components: {
-            vHeader: header,
             home
         },
         beforeDestroy () {

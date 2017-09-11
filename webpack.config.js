@@ -30,10 +30,11 @@ module.exports = {
         inline: true, //启用内联模式
         hot: true,
         historyApiFallback: true, //如果访问的页面不存在(404)时，将会被重定向到 index.html 页面
-        port: 8080,
+        port: 8081,
         noInfo: true,
         // open: true
     },
+    //加载器
     module: {
         rules: [
             {
@@ -80,6 +81,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html', // 相对于output.path 的路径
             template: path.resolve(__dirname, 'index.html'), // 绝对路径
+            //页面body下自动注入打包好的js文件到html页面
             inject: true
         }),
         new ExtractTextPlugin("[name].css")

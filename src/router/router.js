@@ -15,37 +15,40 @@ const router = new Router({
         {
             path: '/',
             name: 'Home',
-            component: Home
+            component: Home,
+            children: [
+                {
+                    path: 'login',
+                    name: 'Login',
+                    component: Login,
+                    meta: {requiresAuth: true}
+                },
+                {
+                    path: 'task',
+                    name: 'Task',
+                    component: Task
+                },
+                {
+                    path: 'personal',
+                    name: 'Personal',
+                    component: Personal,
+                    meta: {requiresAuth: true}
+                },
+                {
+                    path: 'about',
+                    name: 'About',
+                    component: About
+                },
+                {
+                    path: 'canvasTest',
+                    name: 'CanvasTest',
+                    component: CanvasTest
+                }
+            ]
         },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login,
-            meta: {requiresAuth: true}
-        },
-        {
-            path: '/task',
-            name: 'Task',
-            component: Task
-        },
-        {
-            path: '/personal',
-            name: 'Personal',
-            component: Personal,
-            meta: {requiresAuth: true}
-        },
-        {
-            path: '/about',
-            name: 'About',
-            component: About
-        },
-        {
-            path: '/canvasTest',
-            name: 'CanvasTest',
-            component: CanvasTest
-        }
     ]
 })
+
 /*
 
 router.beforeEach((to, from, next) => {

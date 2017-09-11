@@ -1,24 +1,28 @@
 <template>
-    <div id="home">
-        <slot>
-            <img class="home-page-bg" src="./../img/homepage.png">
-        </slot>
+    <div class="page-wrapper">
+        <v-header></v-header>
+        <v-body>
+            <router-view></router-view>
+        </v-body>
+        <!--<v-footer></v-footer>-->
     </div>
 </template>
 
 <script>
+    import header from './../components/header.vue'
+    import vBody from './../components/page-content.vue'
     export default {
-        name: 'home'
+        name: 'home',
+        components: {
+            vHeader: header,
+            vBody: vBody
+        }
     }
 </script>
 
 <style lang="scss" scoped="">
-    #home {
+    .page-wrapper {
         font-size: 14px;
-        .home-page-bg {
-            margin: auto 0;
-            width: 100%;
-        }
     }
 
 </style>
